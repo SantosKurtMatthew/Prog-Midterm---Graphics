@@ -1,0 +1,83 @@
+import java.awt.*;
+import java.awt.geom.*;
+import javax.swing.*;
+
+public class DrawingCanvas extends JComponent{
+	private int width;
+	private int height;
+
+	public DrawingCanvas(int w, int h){
+		width = w;
+		height = h;
+	}
+
+	@Override
+	protected void paintComponent(Graphics g){
+		Graphics2D g2d = (Graphics2D) g;
+
+		RenderingHints rh = new RenderingHints(
+			RenderingHints.KEY_ANTIALIASING,
+			RenderingHints.VALUE_ANTIALIAS_ON
+		);
+		g2d.setRenderingHints(rh);
+		
+		System.out.println("THIS WORKS");
+		System.out.println("PRINT DUCKY HERE");
+
+		Ellipse2D.Double head = new Ellipse2D.Double(200, 100, 150, 150); //(200-350, 100-250)
+		//g2d.setColor(new Color(247, 245, 218));
+		Path2D.Double ahoge = new Path2D.Double();
+
+
+		ahoge.moveTo(245, 110);
+		ahoge.curveTo(245, 60, 272, 80, 275, 90); // Left Curve (245-275, 110-90)
+		ahoge.curveTo(300, 90, 305, 85, 305, 110); // Right Curve (275-305, 90-110)
+		//It is like this to prevent weird textures/overlapping cause the fill covers the draw
+		g2d.setColor(Color.YELLOW);
+		g2d.setColor(new Color(247, 245, 218));
+		g2d.fill(ahoge);
+		g2d.setColor(Color.BLACK);
+		g2d.draw(ahoge);
+		g2d.setColor(Color.YELLOW);
+		g2d.setColor(new Color(247, 245, 218));
+		g2d.fill(head);
+		g2d.setColor(Color.BLACK);
+		g2d.draw(head);
+
+		Ellipse2D.Double leftEye = new Ellipse2D.Double(210, 152, 18, 23);
+		Ellipse2D.Double rightEye = new Ellipse2D.Double(265, 160, 20, 25);
+
+		g2d.setColor(Color.BLACK);
+		g2d.fill(leftEye);
+		g2d.fill(rightEye);
+
+		Path2D.Double goggle = new Path2D.Double();
+		goggle.moveTo(205,150);
+		goggle.curveTo(245,120,290,145,300,170); //Top Curve (205-300, 150-170)
+		goggle.curveTo(310, 185, 295, 210, 280, 200); //Right Curve (310-280, 170-200)
+		goggle.curveTo(264, 180, 231, 175, 225, 180); //Bottom Curve (290-225, 200-180)
+		goggle.curveTo(210, 180, 195, 210, 205, 150); //Left Curve (225-205, 180-150)
+
+		g2d.setColor(new Color(119, 209, 242, 120));
+		g2d.fill(goggle);
+		g2d.setStroke(new BasicStroke(5));
+		g2d.setColor(Color.BLACK);
+		g2d.draw(goggle);
+		g2d.setStroke(new BasicStroke(3));
+		g2d.setColor(Color.YELLOW);
+		g2d.draw(goggle);
+
+
+
+		Line2D.Double line1 = new Line2D.Double(200, 100, 225, 180);
+		Line2D.Double line2 = new Line2D.Double(200, 100, 245, 135);
+		Line2D.Double line3 = new Line2D.Double(350, 100, 300, 160);
+		Line2D.Double line4 = new Line2D.Double(350, 100, 290, 190);
+		g2d.setColor(Color.BLUE);
+		
+		/*g2d.draw(line1);
+		g2d.draw(line2);
+		g2d.draw(line3);
+		g2d.draw(line4);*/
+	}
+}
