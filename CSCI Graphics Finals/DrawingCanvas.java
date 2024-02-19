@@ -19,16 +19,24 @@ public class DrawingCanvas extends JComponent{
 			RenderingHints.KEY_ANTIALIASING,
 			RenderingHints.VALUE_ANTIALIAS_ON
 		);
+		
 		g2d.setRenderingHints(rh);
 		
 		System.out.println("THIS WORKS");
 		System.out.println("PRINT DUCKY HERE");
 
+		Path2D.Double torso = new Path2D.Double();
+		torso.moveTo(230, 235);
+		torso.curveTo(190, 400, 350, 500, 420, 290);
+		torso.curveTo(375, 325, 325, 300, 320, 235);
+		g2d.setColor(new Color(247, 245, 218));
+		g2d.fill(torso);
+		g2d.setColor(Color.BLACK);
+		g2d.draw(torso);
+
+		
 		Ellipse2D.Double head = new Ellipse2D.Double(200, 100, 150, 150); //(200-350, 100-250)
-		//g2d.setColor(new Color(247, 245, 218));
 		Path2D.Double ahoge = new Path2D.Double();
-
-
 		ahoge.moveTo(245, 110);
 		ahoge.curveTo(245, 60, 272, 80, 275, 90); // Left Curve (245-275, 110-90)
 		ahoge.curveTo(300, 90, 305, 85, 305, 110); // Right Curve (275-305, 90-110)
@@ -67,7 +75,28 @@ public class DrawingCanvas extends JComponent{
 		g2d.setColor(Color.YELLOW);
 		g2d.draw(goggle);
 
+		Path2D.Double bill = new Path2D.Double();
+		bill.moveTo(265, 190);
+		bill.lineTo(245, 210);
+		bill.curveTo(250, 235, 175, 215, 190, 200);
+		bill.lineTo(230,180);
+		bill.curveTo(240, 175, 245, 180, 265,190);
+		
+		g2d.setStroke(new BasicStroke(1));
+		
+		g2d.setColor(Color.ORANGE);
+		g2d.fill(bill);
+		g2d.setColor(Color.BLACK);
+		g2d.draw(bill);
 
+		g2d.setColor(Color.BLACK);
+		g2d.rotate(Math.toRadians(45),245,190);
+		g2d.fill(new Ellipse2D.Double(245, 190, 2, 5));
+		g2d.fill(new Ellipse2D.Double(235, 195, 2, 5));
+
+		g2d.rotate(Math.toRadians(-45),245,190);
+
+		
 
 		Line2D.Double line1 = new Line2D.Double(200, 100, 225, 180);
 		Line2D.Double line2 = new Line2D.Double(200, 100, 245, 135);
