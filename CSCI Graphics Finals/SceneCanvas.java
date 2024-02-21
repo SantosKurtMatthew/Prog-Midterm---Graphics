@@ -6,14 +6,11 @@ public class SceneCanvas extends JComponent{
 	private int width;
 	private int height;
 	private Bamboo b1;
-	private Square s1;
-
 
 	public SceneCanvas(int w, int h){
 		width = w;
 		height = h;
-		b1 = new Bamboo();
-		s1 = new Square(500, 100, 100, Color.BLUE);
+		b1 = new Bamboo(400, 0);
 	}
 
 	@Override
@@ -30,8 +27,6 @@ public class SceneCanvas extends JComponent{
 
 		System.out.println("THIS WORKS HERE");
 		System.out.println("PRINT DUCKY HERE");
-
-		b1.draw(g2d);
 		
 		
 		Path2D.Double torso = new Path2D.Double();
@@ -105,7 +100,7 @@ public class SceneCanvas extends JComponent{
 
 		g2d.rotate(Math.toRadians(-45),245,190);
 
-
+		b1.draw(g2d);
 		
 
 	}
