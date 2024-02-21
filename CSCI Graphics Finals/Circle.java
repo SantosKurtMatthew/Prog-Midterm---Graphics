@@ -1,4 +1,4 @@
-public class Circle{
+public class Circle extends DrawingObject{
 	private double x;
 	private double y;
 	private double size;
