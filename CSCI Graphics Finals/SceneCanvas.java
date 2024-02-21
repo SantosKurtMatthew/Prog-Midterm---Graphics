@@ -5,10 +5,15 @@ import javax.swing.*;
 public class SceneCanvas extends JComponent{
 	private int width;
 	private int height;
+	private Bamboo b1;
+	private Square s1;
 
-	public DrawingCanvas(int w, int h){
+
+	public SceneCanvas(int w, int h){
 		width = w;
 		height = h;
+		b1 = new Bamboo();
+		s1 = new Square(500, 100, 100, Color.BLUE);
 	}
 
 	@Override
@@ -22,9 +27,13 @@ public class SceneCanvas extends JComponent{
 		
 		g2d.setRenderingHints(rh);
 		
-		System.out.println("THIS WORKS");
+
+		System.out.println("THIS WORKS HERE");
 		System.out.println("PRINT DUCKY HERE");
 
+		b1.draw(g2d);
+		
+		
 		Path2D.Double torso = new Path2D.Double();
 		torso.moveTo(230, 235);
 		torso.curveTo(190, 400, 350, 500, 420, 290);
@@ -95,6 +104,7 @@ public class SceneCanvas extends JComponent{
 		g2d.fill(new Ellipse2D.Double(235, 195, 2, 5));
 
 		g2d.rotate(Math.toRadians(-45),245,190);
+
 
 		
 
