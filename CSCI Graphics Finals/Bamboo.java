@@ -5,24 +5,33 @@ import javax.swing.*;
 public class Bamboo extends DrawingObject{
 	private double x;
 	private double y;
+	private double size;
 	private Rectangle2D.Double stem;
 	private Line l1;
 	private Line l2;
 	private Line l3;
+	private Line l4;
 
+	public Bamboo(double x, double y, double size){
+		System.out.println(x+"SIZE IS "+size);
+		System.out.println(x+size);
+		System.out.println((x/100)*size);
+		System.out.println(((x+100)/100)*size);
+		stem = new Rectangle2D.Double(x, y, size, 6*size);
 
-	public Bamboo(){
-		stem = new Rectangle2D.Double(500, 0, 100, 500);
-
-		//Line(double x1, double y1, double x2, double y2, double thickness, double Color)
-		l1 = new Line(500, 400, 600, 400, 3, new Color(51,51,0));
+		l1 = new Line(x-1, ((y+90)/100)*size, x+size, ((y+90)/100)*size, 3, new Color(51,51,0));
+		l2 = new Line(x-1, ((y+170)/100)*size, x+size, ((y+170)/100)*size, 3, new Color(51,51,0));
+		l3 = new Line(x-1, ((y+280)/100)*size, x+size, ((y+280)/100)*size, 3, new Color(51,51,0));
+		l4 = new Line(x-1, ((y+400)/100)*size, x+size, ((y+400)/100)*size, 3, new Color(51,51,0));
 
 	}
 
 	public void draw(Graphics2D g2d){
-		System.out.println("THIS BAMBOO PRINTS");
 		g2d.setColor(new Color(19, 38, 14));
 		g2d.fill(stem);
 		l1.draw(g2d);
+		l2.draw(g2d);
+		l3.draw(g2d);
+		l4.draw(g2d);
 	}
 }
