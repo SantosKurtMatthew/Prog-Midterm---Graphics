@@ -19,7 +19,7 @@ public class Line extends DrawingObject{
 	}
 
 	public void draw(Graphics2D g2d){
-		Line2D.Double l = new Line2D.Double(x1, y1, x2, x2);
+		Line2D.Double l = new Line2D.Double(x1, y1, x2, y2);
 		g2d.setColor(color);
 		g2d.setStroke(new BasicStroke(thickness));
 		g2d.draw(l);

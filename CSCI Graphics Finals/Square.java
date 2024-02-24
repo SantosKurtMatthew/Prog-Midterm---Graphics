@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.*;
+
 public class Square extends DrawingObject{
 	private double x;
 	private double y;
