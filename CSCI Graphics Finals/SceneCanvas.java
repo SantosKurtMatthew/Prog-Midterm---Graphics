@@ -2,17 +2,15 @@ import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.*;
 
+import java.util.*;
+
 public class SceneCanvas extends JComponent{
 	private int width;
 	private int height;
 	private Bamboo b1;
+	private MountainScene ms;
 
-
-
-
-	public SceneCanvas(int w, int h){
-		width = w;
-		height = h;
+	public SceneCanvas(){
 		b1 = new Bamboo(100, 0, 100);
 	}
 
@@ -31,8 +29,8 @@ public class SceneCanvas extends JComponent{
 		System.out.println("THIS WORKS HERE");
 		System.out.println("PRINT DUCKY HERE");
 
-		Mountain m1 = new Mountain();
-		m1.draw(g2d);
+		ms = new MountainScene();
+		ms.draw(g2d);
 
 		Line2D.Double vertMiddle = new Line2D.Double(400, 0, 400, 600);
 		Line2D.Double vertMiddle2 = new Line2D.Double(600, 0, 600, 600);

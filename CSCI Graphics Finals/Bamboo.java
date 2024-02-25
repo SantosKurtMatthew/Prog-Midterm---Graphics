@@ -34,4 +34,8 @@ public class Bamboo extends DrawingObject{
 		l3.draw(g2d);
 		l4.draw(g2d);
 	}
+
+	public void moveLeft(){
+		x += 5;
+	}
 }
