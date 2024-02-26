@@ -7,7 +7,5 @@ public class SceneStarter {
 		SceneFrame sf = new SceneFrame();
 		sf.setUpGUI();
 		
-
-		
 	}
 }

@@ -15,7 +15,7 @@ public class Circle extends DrawingObject{
 	}
 
 	public void draw(Graphics2D g2d){
-		Ellipse2D.Double r = Ellipse2D.Double(x, y, size, size);
+		Ellipse2D.Double r = new Ellipse2D.Double(x, y, size, size);
 		g2d.setColor(color);
 		g2d.fill(r);
 	}

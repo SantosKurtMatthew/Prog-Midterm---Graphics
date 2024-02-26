@@ -7,11 +7,16 @@ public class SceneFrame{
 	private SceneCanvas sc;
 
 	public SceneFrame(){
+
+
 		frame = new JFrame();
 		sc = new SceneCanvas();
 	}
 
-	public void setUpGUI(){		
+	public void setUpGUI(){
+
+		
+
 		sc.setPreferredSize(new Dimension(800,600));
 		frame.add(sc);
 		frame.setTitle("Midterm Project - Pararuan - Santos");
