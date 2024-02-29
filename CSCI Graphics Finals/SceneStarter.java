@@ -6,6 +6,8 @@ public class SceneStarter {
 		int h = 600;
 		SceneFrame sf = new SceneFrame();
 		sf.setUpGUI();
+
+		
 		
 	}
 }

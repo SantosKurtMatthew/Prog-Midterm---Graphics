@@ -13,10 +13,7 @@ public class Bamboo extends DrawingObject{
 	private Line l4;
 
 	public Bamboo(double x, double y, double size){
-		System.out.println(x+"SIZE IS "+size);
-		System.out.println(x+size);
-		System.out.println((x/100)*size);
-		System.out.println(((x+100)/100)*size);
+		System.out.println("THE BAMBOO X IS " + x);
 		stem = new Rectangle2D.Double(x, y, size, 6*size);
 
 		l1 = new Line(x-1, ((y+90)/100)*size, x+size, ((y+90)/100)*size, 3, new Color(51,51,0));
@@ -33,9 +30,5 @@ public class Bamboo extends DrawingObject{
 		l2.draw(g2d);
 		l3.draw(g2d);
 		l4.draw(g2d);
-	}
-
-	public void moveLeft(){
-		x += 5;
 	}
 }

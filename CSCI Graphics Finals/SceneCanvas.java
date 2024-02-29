@@ -4,16 +4,50 @@ import javax.swing.*;
 
 import java.util.*;
 import java.awt.font.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.awt.event.*;
 
-public class SceneCanvas extends JComponent{
+//Timer tutorial https://www.youtube.com/watch?v=tHNWIWxRDDA&list=PLZPZq0r_RZOMhCAyywfnYLlrjiVOkdAI1&index=73
+public class SceneCanvas extends JComponent implements ActionListener{
 	private int width;
 	private int height;
-	private Bamboo b1;
-	private MountainScene ms;
-	private TownScene ts;
+	private Mountain m;
+	ArrayList <DrawingObject> mountains;
+
+	private RedGate rg;
+	private Lantern l1, l2, l3, l4, l5;
+	ArrayList <DrawingObject> town;
+
+	private Ducky d1;
+	private int stateCounter;
+
+	javax.swing.Timer timer;
 
 	public SceneCanvas(){
-		b1 = new Bamboo(100, 0, 100);
+		timer = new javax.swing.Timer(250, this);
+		timer.start();
+		stateCounter = 0;
+
+		m = new Mountain();
+		mountains = new ArrayList<DrawingObject>();
+		mountains.add(m);
+
+		rg = new RedGate();
+		l1 = new Lantern(200, 25);
+		l2 = new Lantern(10, 50);
+		l3 = new Lantern(250, 60);
+		l4 = new Lantern(140, 90);
+		l5 = new Lantern(50, 140);
+
+		town = new ArrayList<DrawingObject>();
+		town.add(rg);
+		town.add(l1);
+		town.add(l2);
+		town.add(l3);
+		town.add(l4);
+		town.add(l5);
+
+		d1 = new Ducky();
 	}
 
 	@Override
@@ -26,43 +60,15 @@ public class SceneCanvas extends JComponent{
 		);
 		
 		g2d.setRenderingHints(rh);
+
+		
 		
 
-		System.out.println("THIS WORKS HERE");
-		System.out.println("PRINT DUCKY HERE");
-
-		ms = new MountainScene();
-		ts = new TownScene();
-
-		//ms.draw(g2d);
-		ts.draw(g2d);
-
-		Path2D.Double lantern = new Path2D.Double();
-		lantern.moveTo(60, 0);
-		lantern.lineTo(90, 0);
-		lantern.lineTo(105, 25);
-		lantern.lineTo(85, 70);
-		lantern.lineTo(65, 70);
-		lantern.lineTo(45, 25);
-		lantern.closePath();
-		
-
-		Point2D start = new Point2D.Float(75, 0);
-		Point2D end = new Point2D.Float(75, 70);
-		float[] dist = {0.0f, 0.4f, 1.0f};
-		Color[] colors = {new Color(255, 192, 31), new Color(255, 224,143), Color.WHITE};	
-		LinearGradientPaint p = new LinearGradientPaint(start, end, dist, colors);
-		g2d.setPaint(p);
-		g2d.fill(lantern);
-		g2d.setColor(Color.BLACK);
-		//g2d.draw(lantern);
-
-		Point2D loc = new Point2D.Float(60, 40);
-		Font font = new Font ("TimesRoman", Font.BOLD, 30);
-		FontRenderContext frc = g2d.getFontRenderContext();
-		TextLayout layout = new TextLayout("嘎", font, frc);
-		g2d.setColor(new Color(144, 35, 35));
-		layout.draw(g2d, (float)loc.getX(), (float)loc.getY());
+		for(int i = 0; i<town.size(); i++){
+			//mountains.get(i).draw(g2d);
+			town.get(i).draw(g2d);
+		}
+		d1.draw(g2d);
 
 
 		Line2D.Double vertMiddle = new Line2D.Double(400, 0, 400, 600);
@@ -71,5 +77,28 @@ public class SceneCanvas extends JComponent{
 		g2d.draw(horiMiddle);
 		g2d.draw(vertMiddle);
 
+	}
+
+	public void actionPerformed(ActionEvent ae){
+		l1.flow();
+		l2.flow();
+		l3.flow();
+		l4.flow();
+		l5.flow();
+
+		if (stateCounter%2 == 0){
+			d1.rotateRight();
+			System.out.println(stateCounter/2);
+		}
+		else{
+			d1.rotateLeft();
+			System.out.println(stateCounter);
+		}
+		stateCounter++;
+		repaint();
+		
+	}
+	public Lantern getLantern(){
+		return l1;
 	}
 }

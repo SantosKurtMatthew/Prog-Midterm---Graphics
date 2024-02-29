@@ -20,4 +20,5 @@ public class Square extends DrawingObject{
 		g2d.setColor(color);
 		g2d.fill(r);
 	}
+
 }

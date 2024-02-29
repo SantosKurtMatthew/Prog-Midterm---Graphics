@@ -2,11 +2,15 @@ import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.*;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class TownScene extends DrawingObject{
 	private RedGate rg;
+	
 
 	public TownScene(){
 		rg = new RedGate();
+		
 	}
 
 	public void draw(Graphics2D g2d){
@@ -26,6 +30,23 @@ public class TownScene extends DrawingObject{
 		
 		rg.draw(g2d);
 
+		//Random Generate Integers
+		//https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
+		/*for(int i = 0; i<5; i++){
+			int randomX = ThreadLocalRandom.current().nextInt(0, 590 + 1);
+			int randomY = ThreadLocalRandom.current().nextInt(0, 165 + 1);	
+
+			Lantern l = new Lantern(randomX, randomY);
+			l.draw(g2d);
+		}*/
+
+		
+
+
+	}
+
+	public Lantern[] getLanterns(){
+		return lanterns;
 	}
 
 
