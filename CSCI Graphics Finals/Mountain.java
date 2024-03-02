@@ -99,5 +99,7 @@ public class Mountain extends DrawingObject{
 		MountainBlock b3peak4 = new MountainBlock(670, 375, 70, 225);
 		b3peak4.draw(g2d);
 
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+
 	}
 }

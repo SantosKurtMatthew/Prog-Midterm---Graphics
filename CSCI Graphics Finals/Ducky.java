@@ -199,13 +199,7 @@ public class Ducky extends DrawingObject{
 		
 		g2d.setStroke(new BasicStroke(3));
 		
-		Cloud c1 = new Cloud(0,0,50,Color.LIGHT_GRAY);
-		Cloud c2 = new Cloud(300,0,50,Color.LIGHT_GRAY);
-		Cloud c3 = new Cloud(350,125,50,Color.LIGHT_GRAY);
-		
-		//c1.drawCloudOne(g2d);
-		//c2.drawCloudTwo(g2d);
-		//c3.drawCloudThree(g2d);
+
 		
 		/*
 		BasicStroke bs = new BasicStroke(3.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);

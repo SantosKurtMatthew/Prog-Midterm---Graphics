@@ -12,6 +12,7 @@ public class SceneCanvas extends JComponent implements ActionListener{
 	private int width;
 	private int height;
 	private Mountain m;
+	private Cloud c1, c2, c3;
 	ArrayList <DrawingObject> mountains;
 
 	private RedGate rg;
@@ -24,13 +25,20 @@ public class SceneCanvas extends JComponent implements ActionListener{
 	javax.swing.Timer timer;
 
 	public SceneCanvas(){
-		timer = new javax.swing.Timer(250, this);
+		timer = new javax.swing.Timer(50, this);
 		timer.start();
 		stateCounter = 0;
 
 		m = new Mountain();
+		c1 = new Cloud(0,0,50,Color.LIGHT_GRAY);
+		c2 = new Cloud(300,0,50,Color.LIGHT_GRAY);
+		c3 = new Cloud(350,125,50,Color.LIGHT_GRAY);
 		mountains = new ArrayList<DrawingObject>();
 		mountains.add(m);
+		mountains.add(c1);
+		mountains.add(c2);
+		mountains.add(c3);
+
 
 		rg = new RedGate();
 		l1 = new Lantern(200, 25);
@@ -48,6 +56,8 @@ public class SceneCanvas extends JComponent implements ActionListener{
 		town.add(l5);
 
 		d1 = new Ducky();
+		
+
 	}
 
 	@Override
@@ -63,12 +73,17 @@ public class SceneCanvas extends JComponent implements ActionListener{
 
 		
 		
-
 		for(int i = 0; i<town.size(); i++){
-			//mountains.get(i).draw(g2d);
 			town.get(i).draw(g2d);
 		}
+		for(int i = 0; i<mountains.size(); i++){
+			mountains.get(i).draw(g2d);
+		}
+		
+		AffineTransform oldAt = g2d.getTransform();
+		g2d.scale(0.5, 0.5);
 		d1.draw(g2d);
+		g2d.setTransform(oldAt);
 
 
 		Line2D.Double vertMiddle = new Line2D.Double(400, 0, 400, 600);
@@ -88,11 +103,9 @@ public class SceneCanvas extends JComponent implements ActionListener{
 
 		if (stateCounter%2 == 0){
 			d1.rotateRight();
-			System.out.println(stateCounter/2);
 		}
 		else{
 			d1.rotateLeft();
-			System.out.println(stateCounter);
 		}
 		stateCounter++;
 		repaint();

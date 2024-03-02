@@ -48,6 +48,9 @@ public class Lantern extends DrawingObject{
 
 	public void flow() {
 		x += 3;
+		if(x > 800){
+			x = 0;
+		}
 		if(y == yOriginal+5){
 			y -= 10;
 		}

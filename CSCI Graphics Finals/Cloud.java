@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.*;
 
-public class Cloud {
+public class Cloud extends DrawingObject{
 
 	private double x;
 	private double y;
@@ -19,6 +19,9 @@ public class Cloud {
 		this.color = color;
 	}
 	
+	public void draw(Graphics2D g2d){
+		
+	}
 	public void drawCloudOne(Graphics2D g2d) {
 		e1 = new Ellipse2D.Double(x,y+size*.7,size*1.75,size);
 		e2 = new Ellipse2D.Double(x+size*.6,y,size*3,size*1.7);
