@@ -21,4 +21,15 @@ public class Square extends DrawingObject{
 		g2d.fill(r);
 	}
 
+	public void moveLeft(){
+		x -= 5;
+	}
+	public void moveRight(){
+		x += 5;
+	}
+	public double giveX(){
+		System.out.println("THE RETURNED  X IS " + x);
+		return x;
+	}	
+
 }

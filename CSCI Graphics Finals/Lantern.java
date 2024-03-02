@@ -9,6 +9,7 @@ public class Lantern extends DrawingObject{
 	private float yOriginal;
 
 	public Lantern(float x, float y){
+		//allowed space is (650, 235)
 		this.x = x;
 		this.y = y;
 		yOriginal = y;
@@ -39,11 +40,6 @@ public class Lantern extends DrawingObject{
 		TextLayout layout = new TextLayout("嘎", font, frc);
 		g2d.setColor(new Color(144, 35, 35));
 		layout.draw(g2d, (float)loc.getX(), (float)loc.getY());
-	}
-
-	public double giveX(){
-		System.out.println("THE RETURNED  X IS " + x);
-		return x;
 	}
 
 	public void flow() {

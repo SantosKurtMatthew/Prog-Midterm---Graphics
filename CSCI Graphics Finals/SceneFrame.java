@@ -34,22 +34,65 @@ public class SceneFrame implements KeyListener{
 	}
 	@Override
 	public void keyPressed(KeyEvent e){
-		Lantern s = sc.getLantern();
-		switch(e.getKeyChar()){
-		case'a':
-			sc.repaint();
+		
+		//squareInSquare s = sc.getSquareInSquare();
+		Ducky d = sc.getDucky();
 
-			System.out.println(s.giveX());
+		if (e.getKeyCode() == 65){
+			d.moveLeft();
+			d.waddle();
+
+
+			System.out.println(d.giveX());
+			System.out.println("THIS IS HELD: "+ e.getKeyCode());
+		}
+		else if (e.getKeyCode() == 68){
+			d.moveRight();
+			d.waddle();
+			
+
+			System.out.println(d.giveX());
+			System.out.println("THIS IS HELD: "+ e.getKeyCode());
+		}
+		switch(e.getKeyCode()){
+		case 65:
+			d.moveLeft();
+			d.waddle();
+
+			System.out.println(d.giveX());
 			System.out.println("THIS IS HELD: "+ e.getKeyCode());
 			break;
+		case 68:
+			d.moveRight();
+			d.waddle();
+
+			System.out.println(d.giveX());
+			System.out.println("THIS IS HELD: "+ e.getKeyCode());
+			break;
+		case 83:
+			d.moveDown();
+			d.waddle();
+
+			System.out.println(d.giveX());
+			System.out.println("THIS IS HELD: "+ e.getKeyCode());
+			break;
+		case 87:
+			d.moveUp();
+			d.waddle();
+
+			System.out.println(d.giveX());
+			System.out.println("THIS IS HELD: "+ e.getKeyCode());
+			break;	
 		}
+
+		sc.repaint();
+
 	}
+
 	@Override
 	public void keyReleased(KeyEvent e){
 		System.out.println("THIS IS RELEASED: "+ e.getKeyCode());
 	}
-	
-
 
 
 }

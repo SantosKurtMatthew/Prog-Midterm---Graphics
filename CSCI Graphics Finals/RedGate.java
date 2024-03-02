@@ -43,6 +43,8 @@ public class RedGate extends DrawingObject{
 		moonOuter.draw(g2d);
 		moonInner.draw(g2d);
 
+
+
 		Trapezoid mainGate = new Trapezoid(150, 250, 500, 100, new Color(144, 35, 35));
 		mainGate.draw(g2d);
 		Trapezoid leftGate = new Trapezoid(0, 375, 250, 100, new Color(144, 35, 35));

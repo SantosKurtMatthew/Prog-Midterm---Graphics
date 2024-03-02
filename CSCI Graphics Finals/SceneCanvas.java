@@ -20,7 +20,7 @@ public class SceneCanvas extends JComponent implements ActionListener{
 	ArrayList <DrawingObject> town;
 
 	private Ducky d1;
-	private int stateCounter;
+	private int stateCounter, backgroundNumber;
 
 	javax.swing.Timer timer;
 
@@ -30,9 +30,9 @@ public class SceneCanvas extends JComponent implements ActionListener{
 		stateCounter = 0;
 
 		m = new Mountain();
-		c1 = new Cloud(0,0,50,Color.LIGHT_GRAY);
-		c2 = new Cloud(300,0,50,Color.LIGHT_GRAY);
-		c3 = new Cloud(350,125,50,Color.LIGHT_GRAY);
+		c1 = new Cloud(0,0,50,Color.LIGHT_GRAY,1);
+		c2 = new Cloud(275,100,50,Color.LIGHT_GRAY,2);
+		c3 = new Cloud(500,25,50,Color.LIGHT_GRAY,3);
 		mountains = new ArrayList<DrawingObject>();
 		mountains.add(m);
 		mountains.add(c1);
@@ -55,8 +55,9 @@ public class SceneCanvas extends JComponent implements ActionListener{
 		town.add(l4);
 		town.add(l5);
 
-		d1 = new Ducky();
-		
+		d1 = new Ducky(100, 100);
+		backgroundNumber = 1;
+
 
 	}
 
@@ -70,15 +71,18 @@ public class SceneCanvas extends JComponent implements ActionListener{
 		);
 		
 		g2d.setRenderingHints(rh);
-
 		
+		if(backgroundNumber == 0){
+			for(int i = 0; i<mountains.size(); i++){
+				mountains.get(i).draw(g2d);
+			}	
+		}
+		else if(backgroundNumber == 1){
+			for(int i = 0; i<town.size(); i++){
+				town.get(i).draw(g2d);
+			}	
+		}
 		
-		for(int i = 0; i<town.size(); i++){
-			town.get(i).draw(g2d);
-		}
-		for(int i = 0; i<mountains.size(); i++){
-			mountains.get(i).draw(g2d);
-		}
 		
 		AffineTransform oldAt = g2d.getTransform();
 		g2d.scale(0.5, 0.5);
@@ -95,23 +99,37 @@ public class SceneCanvas extends JComponent implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent ae){
-		l1.flow();
-		l2.flow();
-		l3.flow();
-		l4.flow();
-		l5.flow();
 
+
+		
+
+
+		if(backgroundNumber == 0){
+			c1.flow();
+			c2.flow();
+			c3.flow();
+		}
+		else if(backgroundNumber == 1){
+			l1.flow();
+			l2.flow();
+			l3.flow();
+			l4.flow();
+			l5.flow();
+		}
+		
 		if (stateCounter%2 == 0){
-			d1.rotateRight();
+			//d1.rotateRight();
 		}
 		else{
-			d1.rotateLeft();
+			//d1.rotateLeft();
 		}
+		
 		stateCounter++;
 		repaint();
-		
 	}
-	public Lantern getLantern(){
-		return l1;
+	
+	public Ducky getDucky(){
+		return d1;
 	}
+
 }
