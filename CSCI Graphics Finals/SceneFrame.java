@@ -64,12 +64,25 @@ public class SceneFrame implements KeyListener{
 			System.out.println(d.giveX());
 			System.out.println("THIS IS HELD: "+ e.getKeyCode());
 			break;	
+		case 49:
+			d.swapEyes();	
+			break;
+		case 50:
+			d.swapGoggles();
+			break;
+		case 51:
+			d.swapHat();
+			break;
+		case 52: 
+			d.swapSalbabida();
+			break;
+
 		}
-		if(d.giveX() > 1450){
+		if(d.giveX() < -460){
+			sc.changeBackground(2210);
+		}
+		else if(d.giveX() > 2520){
 			sc.changeBackground(-140);
-		}
-		else if(d.giveX() < -460){
-			sc.changeBackground(1140);
 		}
 		sc.repaint();
 	}
@@ -78,7 +91,5 @@ public class SceneFrame implements KeyListener{
 	public void keyReleased(KeyEvent e){
 		System.out.println("THIS IS RELEASED: "+ e.getKeyCode());
 	}
-
-
 
 }

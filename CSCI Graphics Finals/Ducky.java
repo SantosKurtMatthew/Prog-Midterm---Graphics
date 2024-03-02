@@ -7,7 +7,7 @@ public class Ducky extends DrawingObject{
 	private Triangle hat;
 	private int rotation;
 	private double x, y;
-	private boolean waddleState;
+	private boolean waddleState, slitEyes, enableGoggles, enableSalbabida, enableHat;
 
 
 	public Ducky(double x, double y){
@@ -15,6 +15,10 @@ public class Ducky extends DrawingObject{
 		this.y = y;
 		rotation = 0;
 		waddleState = false;
+		slitEyes = false;
+		enableGoggles = true;
+		enableSalbabida = true;
+		enableHat = true;
 	}
 
 	public void draw(Graphics2D g2d){
@@ -31,6 +35,8 @@ public class Ducky extends DrawingObject{
 		hanfuBelt = new Path2D.Double();
 		head = new Ellipse2D.Double(x+200, y+100, 150, 150); //(200-350, 100-250)
 		ahoge = new Path2D.Double();
+		leftEye = new Ellipse2D.Double(x+208, y+155, 22, 22);
+		rightEye = new Ellipse2D.Double(x+265, y+160, 24, 24);
 		happyEyes = new Path2D.Double();
 		goggle = new Path2D.Double();
 		bill = new Path2D.Double();
@@ -221,36 +227,40 @@ public class Ducky extends DrawingObject{
 		g2d.fill(head);
 		g2d.setColor(Color.BLACK);
 		g2d.draw(head);
-		/*
-		Ellipse2D.Double leftEye = new Ellipse2D.Double(x+208, 155, 22, 22);
-		Ellipse2D.Double rightEye = new Ellipse2D.Double(x+265, 160, 24, 24);
-		g2d.setColor(Color.BLACK);
-		g2d.fill(leftEye);
-		g2d.fill(rightEye);
-		*/
 		
-		happyEyes.moveTo(x+210, y+170);
-		happyEyes.curveTo(x+220, y+160, x+230, y+160, x+235, y+165);
-		happyEyes.moveTo(x+260, y+165);
-		happyEyes.curveTo(x+265, y+160, x+280, y+160, x+285, y+175);
-		g2d.setColor(Color.BLACK);
-		g2d.setStroke(new BasicStroke(6, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-		g2d.draw(happyEyes);
-		//
+		
+		if(slitEyes == false){
+			g2d.setColor(Color.BLACK);
+			g2d.fill(leftEye);
+			g2d.fill(rightEye);	
+		}
+		else{
+			happyEyes.moveTo(x+210, y+170);
+			happyEyes.curveTo(x+220, y+160, x+230, y+160, x+235, y+165);
+			happyEyes.moveTo(x+260, y+165);
+			happyEyes.curveTo(x+265, y+160, x+280, y+160, x+285, y+175);
+			g2d.setColor(Color.BLACK);
+			g2d.setStroke(new BasicStroke(6, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+			g2d.draw(happyEyes);
+		}
 
-		goggle.moveTo(x+205, y+150);
-		goggle.curveTo(x+245, y+120, x+290, y+145, x+300, y+170); //Top Curve (205-300, 150-170)
-		goggle.curveTo(x+310, y+185, x+295, y+210, x+280, y+200); //Right Curve (310-280, 170-200)
-		goggle.curveTo(x+264, y+180, x+231, y+175, x+225, y+180); //Bottom Curve (290-225, 200-180)
-		goggle.curveTo(x+210, y+180, x+195, y+210, x+205, y+150); //Left Curve (225-205, 180-150)
-		g2d.setColor(new Color(119, 209, 242, 120));
-		g2d.fill(goggle);
-		g2d.setStroke(new BasicStroke(5));
-		g2d.setColor(Color.BLACK);
-		g2d.draw(goggle);
-		g2d.setStroke(new BasicStroke(3));
-		g2d.setColor(Color.YELLOW);
-		g2d.draw(goggle);
+		if (enableGoggles == true){
+			goggle.moveTo(x+205, y+150);
+			goggle.curveTo(x+245, y+120, x+290, y+145, x+300, y+170); //Top Curve (205-300, 150-170)
+			goggle.curveTo(x+310, y+185, x+295, y+210, x+280, y+200); //Right Curve (310-280, 170-200)
+			goggle.curveTo(x+264, y+180, x+231, y+175, x+225, y+180); //Bottom Curve (290-225, 200-180)
+			goggle.curveTo(x+210, y+180, x+195, y+210, x+205, y+150); //Left Curve (225-205, 180-150)
+			g2d.setColor(new Color(119, 209, 242, 120));
+			g2d.fill(goggle);
+			g2d.setStroke(new BasicStroke(5));
+			g2d.setColor(Color.BLACK);
+			g2d.draw(goggle);
+			g2d.setStroke(new BasicStroke(3));
+			g2d.setColor(Color.YELLOW);
+			g2d.draw(goggle);	
+		}
+
+		
 		
 		bill.moveTo(x+265, y+190);
 		bill.lineTo(x+245, y+210);
@@ -267,24 +277,29 @@ public class Ducky extends DrawingObject{
 		g2d.fill(new Ellipse2D.Double(x+245, y+190, 2, 5)); //right nostril
 		g2d.fill(new Ellipse2D.Double(x+235, y+195, 2, 5)); //left nostril
 		g2d.setTransform(reset);
+	
 		// hat
-		
-		g2d.rotate(Math.toRadians(20), x+275, y+175);
-		hat.draw(g2d);
-		g2d.setColor(Color.DARK_GRAY);
-		g2d.fill(new Ellipse2D.Double(x+160, y+125, 230, 30));
-		g2d.setTransform(reset);
-		
-		double salbabidaLeftTipX = x+170;
-		double salbabidaRightTipX = x+380;
-		salbabida.moveTo(salbabidaLeftTipX, y+255);
-		salbabida.curveTo(salbabidaLeftTipX, y+245, salbabidaLeftTipX, y+230, x+220, y+225); // left curve going up
-		salbabida.curveTo(x+230, y+250, x+320, y+250, x+330, y+225); // top curve
-		salbabida.curveTo(salbabidaRightTipX, y+230, salbabidaRightTipX, y+245, salbabidaRightTipX, y+255); // right curve going down
-		salbabida.curveTo(x+355, y+310, x+195, y+310, salbabidaLeftTipX, y+255); // bottom curve
-		g2d.setColor(Color.BLUE);
-		g2d.setStroke(new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-		g2d.fill(salbabida);	
+		if(enableHat == true){
+			g2d.rotate(Math.toRadians(20), x+275, y+175);
+			hat.draw(g2d);
+			g2d.setColor(Color.DARK_GRAY);
+			g2d.fill(new Ellipse2D.Double(x+160, y+125, 230, 30));
+			g2d.setTransform(reset);	
+		}
+
+		//Salbabida
+		if(enableSalbabida == true){
+			double salbabidaLeftTipX = x+170;
+			double salbabidaRightTipX = x+380;
+			salbabida.moveTo(salbabidaLeftTipX, y+255);
+			salbabida.curveTo(salbabidaLeftTipX, y+245, salbabidaLeftTipX, y+230, x+220, y+225); // left curve going up
+			salbabida.curveTo(x+230, y+250, x+320, y+250, x+330, y+225); // top curve
+			salbabida.curveTo(salbabidaRightTipX, y+230, salbabidaRightTipX, y+245, salbabidaRightTipX, y+255); // right curve going down
+			salbabida.curveTo(x+355, y+310, x+195, y+310, salbabidaLeftTipX, y+255); // bottom curve
+			g2d.setColor(Color.BLUE);
+			g2d.setStroke(new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+			g2d.fill(salbabida);		
+		}	
 
 		g2d.setTransform(absoluteReset);
 		rotation = -5;
@@ -298,16 +313,16 @@ public class Ducky extends DrawingObject{
 		rotation += 15;
 	}
 	public void moveLeft(){
-		x -= 10;
+		x -= 20;
 	}
 	public void moveRight(){
-		x += 10;
+		x += 20;
 	}
 	public void moveUp(){
-		y -= 10;
+		y -= 20;
 	}
 	public void moveDown(){
-		y += 10;
+		y += 20;
 	}
 	public void waddle(){
 		if(waddleState == false){
@@ -334,5 +349,37 @@ public class Ducky extends DrawingObject{
 		this.y = y;
 	}
 
+	public void swapEyes(){
+		if(slitEyes == false){
+			slitEyes = true;
+		}
+		else{
+			slitEyes = false;
+		}
+	}
+	public void swapGoggles(){
+		if(enableGoggles == false){
+			enableGoggles = true;
+		}
+		else{
+			enableGoggles = false;
+		}
+	}
+	public void swapHat(){
+		if(enableHat == false){
+			enableHat = true;
+		}
+		else{
+			enableHat = false;
+		}
+	}
+	public void swapSalbabida(){
+		if(enableSalbabida == false){
+			enableSalbabida = true;
+		}
+		else{
+			enableSalbabida = false;
+		}
+	}
 
 }

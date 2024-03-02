@@ -82,7 +82,7 @@ public class SceneCanvas extends JComponent implements ActionListener{
 		}
 		
 		AffineTransform oldAt = g2d.getTransform();
-		g2d.scale(0.5, 0.5);
+		g2d.scale(0.3, 0.3);
 		d1.draw(g2d);
 		g2d.setTransform(oldAt);
 	}
@@ -120,5 +120,4 @@ public class SceneCanvas extends JComponent implements ActionListener{
 	public Ducky getDucky(){
 		return d1;
 	}
-
 }
