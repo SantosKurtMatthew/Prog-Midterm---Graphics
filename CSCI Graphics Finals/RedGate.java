@@ -43,6 +43,24 @@ public class RedGate extends DrawingObject{
 		moonOuter.draw(g2d);
 		moonInner.draw(g2d);
 
+		Color goldColor = new Color(255, 192, 31);
+		Line goldLiningMain = new Line(200, 245, 600, 245, 10, goldColor);
+		Circle goldCapLeft = new Circle(190, 235, 15, goldColor);
+		Circle goldCapRight = new Circle(595, 235, 15, goldColor);
+
+		goldLiningMain.draw(g2d);
+		goldCapLeft.draw(g2d);
+		goldCapRight.draw(g2d);
+
+		Line goldLiningLeft = new Line(50, 370, 200, 370, 10, goldColor);
+		Circle goldCapLeftLeft = new Circle(40, 360, 15, goldColor);
+		goldLiningLeft.draw(g2d);
+		goldCapLeftLeft.draw(g2d);
+
+		Line goldLiningRight = new Line(600, 370, 750, 370, 10, goldColor);
+		Circle goldCapRightRight = new Circle(745, 360, 15, goldColor);
+		goldLiningRight.draw(g2d);
+		goldCapRightRight.draw(g2d);
 
 
 		Trapezoid mainGate = new Trapezoid(150, 250, 500, 100, new Color(144, 35, 35));
@@ -57,32 +75,24 @@ public class RedGate extends DrawingObject{
 		Rectangle2D.Double leftPillar = new Rectangle2D.Double(50, 475, 50, 125);
 		Rectangle2D.Double rightPillar = new Rectangle2D.Double(700, 475, 50, 125);
 
+		Square leftPillarLeftBox = new Square(190, 590, 10, new Color(86, 16, 16));
+		Square leftPillarRightBox = new Square(250, 590, 10, new Color(86, 16, 16));
+		leftPillarLeftBox.draw(g2d);
+		leftPillarRightBox.draw(g2d);
+		Square rightPillarLeftBox = new Square(540, 590, 10, new Color(86, 16, 16));
+		Square rightPillarRightBox = new Square(600, 590, 10, new Color(86, 16, 16));
+		rightPillarLeftBox.draw(g2d);
+		rightPillarRightBox.draw(g2d);
+
+
 		g2d.setColor(new Color(86, 16, 16)); //Dark Red Color 
 		g2d.fill(mainPillarLeft);
 		g2d.fill(mainPillarRight);
 		g2d.fill(leftPillar);
 		g2d.fill(rightPillar);
 
-		Rectangle2D.Double goldLiningMain = new Rectangle2D.Double(200, 240, 400, 10);
-		Ellipse2D.Double goldCapLeft = new Ellipse2D.Double(190, 235, 15, 15);
-		Ellipse2D.Double goldCapRight = new Ellipse2D.Double(595, 235, 15, 15);
 
-		Rectangle2D.Double goldLiningLeft = new Rectangle2D.Double(50, 365, 150, 10);
-		Ellipse2D.Double goldCapLeftLeft = new Ellipse2D.Double(40, 360, 15, 15);
 
-		Rectangle2D.Double goldLiningRight = new Rectangle2D.Double(600, 365, 150, 10);
-		Ellipse2D.Double goldCapRightRight = new Ellipse2D.Double(745, 360, 15, 15);
-
-		g2d.setColor(new Color(255, 192, 31)); //Yellowish Gold Color
-		g2d.fill(goldLiningMain);
-		g2d.fill(goldCapLeft);
-		g2d.fill(goldCapRight);
-
-		g2d.fill(goldLiningLeft);
-		g2d.fill(goldCapLeftLeft);
-
-		g2d.fill(goldLiningRight);
-		g2d.fill(goldCapRightRight);
 
 
 		for (int i = 200; i<580; i += 27.14){
