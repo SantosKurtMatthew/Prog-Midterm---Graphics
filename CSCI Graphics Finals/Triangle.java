@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.*;
 
-public class Triangle {
+public class Triangle extends DrawingObject{
 	private double oneX;
 	private double oneY;
 	private double twoX;
@@ -10,8 +10,9 @@ public class Triangle {
 	private double threeY;
 	private Color color;
 	private Path2D.Double triangle;
+	private String type;
 	
-	public Triangle(double oneX, double oneY, double twoX, double twoY, double threeX, double threeY, Color color) {
+	public Triangle(double oneX, double oneY, double twoX, double twoY, double threeX, double threeY, Color color, String type) {
 		this.oneX = oneX;
 		this.oneY = oneY;
 		this.twoX = twoX;
@@ -19,9 +20,10 @@ public class Triangle {
 		this.threeX = threeX;
 		this.threeY = threeY;
 		this.color = color;
+		this.type = type;
 	}
 
-	public void fillTriangle(Graphics2D g2d) {
+	public void draw(Graphics2D g2d) {
 		
 		triangle = new Path2D.Double();
 		triangle.moveTo(oneX, oneY);
@@ -29,23 +31,12 @@ public class Triangle {
 		triangle.lineTo(threeX, threeY);
 		triangle.closePath();
 		g2d.setColor(color);
-		g2d.fill(triangle);
 		
-	}
-	
-	public void drawTriangle(Graphics2D g2d) {
-		
-		triangle = new Path2D.Double();
-		triangle.moveTo(oneX, oneY);
-		triangle.lineTo(twoX, twoY);
-		triangle.lineTo(threeX, threeY);
-		triangle.closePath();
-		g2d.setColor(color);
-		g2d.draw(triangle);
+		if( type.equals( "fill" ) )
+			g2d.fill(triangle);
+		else if( type.equals( "draw" ) )
+			g2d.draw(triangle);
 		
 	}
 
-
-
-	
 }

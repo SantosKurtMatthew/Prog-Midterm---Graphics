@@ -14,7 +14,6 @@ public class SceneFrame implements KeyListener{
 	}
 
 	public void setUpGUI(){
-		
 		sc.setPreferredSize(new Dimension(800,600));
 		frame.add(sc);
 
@@ -34,26 +33,8 @@ public class SceneFrame implements KeyListener{
 	}
 	@Override
 	public void keyPressed(KeyEvent e){
-		
-		//squareInSquare s = sc.getSquareInSquare();
 		Ducky d = sc.getDucky();
 
-		if (e.getKeyCode() == 65){
-			d.moveLeft();
-			d.waddle();
-
-
-			System.out.println(d.giveX());
-			System.out.println("THIS IS HELD: "+ e.getKeyCode());
-		}
-		else if (e.getKeyCode() == 68){
-			d.moveRight();
-			d.waddle();
-			
-
-			System.out.println(d.giveX());
-			System.out.println("THIS IS HELD: "+ e.getKeyCode());
-		}
 		switch(e.getKeyCode()){
 		case 65:
 			d.moveLeft();
@@ -84,9 +65,13 @@ public class SceneFrame implements KeyListener{
 			System.out.println("THIS IS HELD: "+ e.getKeyCode());
 			break;	
 		}
-
+		if(d.giveX() > 1450){
+			sc.changeBackground(-140);
+		}
+		else if(d.giveX() < -460){
+			sc.changeBackground(1140);
+		}
 		sc.repaint();
-
 	}
 
 	@Override

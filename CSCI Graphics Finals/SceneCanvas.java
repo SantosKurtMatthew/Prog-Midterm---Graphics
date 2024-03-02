@@ -20,14 +20,13 @@ public class SceneCanvas extends JComponent implements ActionListener{
 	ArrayList <DrawingObject> town;
 
 	private Ducky d1;
-	private int stateCounter, backgroundNumber;
+	private int backgroundNumber;
 
 	javax.swing.Timer timer;
 
 	public SceneCanvas(){
 		timer = new javax.swing.Timer(50, this);
 		timer.start();
-		stateCounter = 0;
 
 		m = new Mountain();
 		c1 = new Cloud(0,0,50,Color.LIGHT_GRAY,1);
@@ -58,7 +57,6 @@ public class SceneCanvas extends JComponent implements ActionListener{
 		d1 = new Ducky(100, 100);
 		backgroundNumber = 1;
 
-
 	}
 
 	@Override
@@ -83,26 +81,13 @@ public class SceneCanvas extends JComponent implements ActionListener{
 			}	
 		}
 		
-		
 		AffineTransform oldAt = g2d.getTransform();
 		g2d.scale(0.5, 0.5);
 		d1.draw(g2d);
 		g2d.setTransform(oldAt);
-
-
-		Line2D.Double vertMiddle = new Line2D.Double(400, 0, 400, 600);
-		Line2D.Double horiMiddle = new Line2D.Double(0, 300, 800, 300);
-		g2d.setColor(Color.RED);
-		g2d.draw(horiMiddle);
-		g2d.draw(vertMiddle);
-
 	}
 
 	public void actionPerformed(ActionEvent ae){
-
-
-		
-
 
 		if(backgroundNumber == 0){
 			c1.flow();
@@ -116,18 +101,22 @@ public class SceneCanvas extends JComponent implements ActionListener{
 			l4.flow();
 			l5.flow();
 		}
-		
-		if (stateCounter%2 == 0){
-			//d1.rotateRight();
-		}
-		else{
-			//d1.rotateLeft();
-		}
-		
-		stateCounter++;
 		repaint();
 	}
 	
+	public void changeBackground(double spawnX){
+		if (backgroundNumber == 0){
+			backgroundNumber = 1;
+			d1.spawnAt(spawnX, d1.giveY());
+			repaint();
+		}
+		else if(backgroundNumber == 1){
+			backgroundNumber = 0;
+			d1.spawnAt(spawnX, d1.giveY());
+			repaint();
+		}
+	}
+
 	public Ducky getDucky(){
 		return d1;
 	}

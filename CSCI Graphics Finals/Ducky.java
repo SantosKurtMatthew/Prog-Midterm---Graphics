@@ -6,12 +6,11 @@ public class Ducky extends DrawingObject{
 	private Ellipse2D.Double hanfuOuterBack, head, leftEye, rightEye;
 	private Triangle hat;
 	private int rotation;
-	private float x;
-	private float y;
+	private double x, y;
 	private boolean waddleState;
 
 
-	public Ducky(float x, float y){
+	public Ducky(double x, double y){
 		this.x = x;
 		this.y = y;
 		rotation = 0;
@@ -35,7 +34,7 @@ public class Ducky extends DrawingObject{
 		happyEyes = new Path2D.Double();
 		goggle = new Path2D.Double();
 		bill = new Path2D.Double();
-		hat = new Triangle(x+275, y+50, x+160, y+140, x+390, y+140, Color.DARK_GRAY);
+		hat = new Triangle(x+275, y+50, x+160, y+140, x+390, y+140, Color.DARK_GRAY, "fill");
 		salbabida = new Path2D.Double();
 		
 
@@ -269,18 +268,15 @@ public class Ducky extends DrawingObject{
 		g2d.fill(new Ellipse2D.Double(x+235, y+195, 2, 5)); //left nostril
 		g2d.setTransform(reset);
 		// hat
+		
 		g2d.rotate(Math.toRadians(20), x+275, y+175);
-		hat.fillTriangle(g2d);
+		hat.draw(g2d);
 		g2d.setColor(Color.DARK_GRAY);
 		g2d.fill(new Ellipse2D.Double(x+160, y+125, 230, 30));
-		
-		
 		g2d.setTransform(reset);
 		
-		
-		
-		float salbabidaLeftTipX = x+170;
-		float salbabidaRightTipX = x+380;
+		double salbabidaLeftTipX = x+170;
+		double salbabidaRightTipX = x+380;
 		salbabida.moveTo(salbabidaLeftTipX, y+255);
 		salbabida.curveTo(salbabidaLeftTipX, y+245, salbabidaLeftTipX, y+230, x+220, y+225); // left curve going up
 		salbabida.curveTo(x+230, y+250, x+320, y+250, x+330, y+225); // top curve
@@ -326,7 +322,17 @@ public class Ducky extends DrawingObject{
 	public double giveX(){
 		System.out.println("THE RETURNED  X IS " + x);
 		return x;
+	}
+
+	public double giveY(){
+		System.out.println("THE RETURNED  Y IS " + x);
+		return y;
 	}	
+
+	public void spawnAt(double x, double y){
+		this.x = x;
+		this.y = y;
+	}
 
 
 }
