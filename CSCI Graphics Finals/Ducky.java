@@ -340,12 +340,11 @@ public class Ducky extends DrawingObject{
 		}
 	}
 	public double giveX(){
-		System.out.println("THE RETURNED  X IS " + x);
 		return x;
 	}
 
 	public double giveY(){
-		System.out.println("THE RETURNED  Y IS " + x);
+		System.out.println("THE RETURNED  Y IS " + y);
 		return y;
 	}	
 
