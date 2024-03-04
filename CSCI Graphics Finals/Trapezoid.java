@@ -1,5 +1,5 @@
 /**
-The Sign class is a basic shape and extends the DrawingObject abstract class. 
+The Trapezoid class is a basic shape and extends the DrawingObject abstract class. 
 The constructor takes the starting x and y coordinates where the point of reference is the top left corner of a rectangle surrounding the trapezoid, the width, 
 the height and the color of the trapezoid.
 The Trapezoid is drawn using a Path2D.Double object.
@@ -49,7 +49,7 @@ public class Trapezoid extends DrawingObject{
 	}
 
 	/**	
-		The line is drawn using Path2D.Double and Graphics2D
+		The trapezoid is drawn using Path2D.Double and Graphics2D
 		@param g2d The Graphics2D object
 	**/
 	public void draw(Graphics2D g2d){

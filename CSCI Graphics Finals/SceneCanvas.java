@@ -64,6 +64,8 @@ public class SceneCanvas extends JComponent implements ActionListener{
 		stateCounter = 0;
 		timer = new javax.swing.Timer(50, this);
 		timer.start();
+		d1 = new Ducky(100, 100);
+
 		m = new Mountain();
 		sun = new Moon(new Color(250, 220, 100), new Color(224, 168, 36));
 		sign1 = new Sign(505, 135);
@@ -92,6 +94,7 @@ public class SceneCanvas extends JComponent implements ActionListener{
 		mountains.add(f4);
 		mountains.add(f5);
 		mountains.add(f6);
+		mountains.add(d1);
 		
 		rg = new RedGate();
 		l1 = new Lantern(-10, 50);
@@ -113,10 +116,9 @@ public class SceneCanvas extends JComponent implements ActionListener{
 		town.add(star1);
 		town.add(star2);
 		town.add(moon);
+		town.add(d1);
 
-
-		d1 = new Ducky(100, 100);
-		backgroundNumber = 1;
+		backgroundNumber = 0;
 	}
 
 	@Override
@@ -145,8 +147,7 @@ public class SceneCanvas extends JComponent implements ActionListener{
 				town.get(i).draw(g2d);
 			}	
 		}
-		d1.draw(g2d);
-
+		
 	}
 
 	/**

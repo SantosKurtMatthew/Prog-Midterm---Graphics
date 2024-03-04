@@ -71,7 +71,7 @@ public class Moon extends DrawingObject{
 	/**
 		This method is meant to be used with the timer in the SceneCanvas class in order to animate the glow of the moon.
 		In order to make the pulsing slower, the pulsing only happens at specific intervals of the timer. It will either 
-		shrink or set the glow circle back to its normal size, for each of the 3 glow circles of the moon.
+		shrink or set the glow circle back to its normal size. Each of the 3 glow circles of the moon has a different interval.
 	**/
 	public void glowFlow(int flickerCounter){
 		if(flickerCounter % 30 == 0){
@@ -120,6 +120,5 @@ public class Moon extends DrawingObject{
 				full1 = true;
 			}	
 		}
-
 	}
 }

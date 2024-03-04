@@ -1,3 +1,26 @@
+/**
+The Lantern class extends the DrawingObject abstract class.
+It draws a lantern with a gradient background and a text in the center.
+It is animated using a timer in SceneCanvas.
+
+@author Nicole (Coeli) Pararuan (234814) and Kurt Santos (235666)
+@version March 6, 2024
+**/
+
+/*
+I have not discussed the Java language code in my program
+with anyone other than my instructor or the teaching assistants
+assigned to this course.
+
+I have not used Java language code obtained from another student,
+or any other unauthorized source, either modified or unmodified.
+
+If any Java language code or documentation used in my program
+was obtained from another source, such as a textbook or website,
+that has been clearly noted with a proper citation in the comments
+of my program.
+*/
+
 import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.*;
@@ -11,8 +34,12 @@ public class Lantern extends DrawingObject{
 	private float newBaseY;
 	private boolean up;
 
+	/**
+		The constructor initializes the values. The size of the lantern is constant.
+		@param x the starting x value of the lantern
+		@param y the starting y value of the lantern
+	**/
 	public Lantern(float x, float y){
-		//allowed space is (650, 235)
 		this.x = x;
 		this.y = y;
 		yOriginal = y;
@@ -20,7 +47,13 @@ public class Lantern extends DrawingObject{
 		up = false;
 		newBaseY = y;
 	}
-
+	
+	/**
+		The lantern is drawn using a Path2D object.
+		It is filled using the LinearGradientPaint object.
+		The text is drawn using the TextLayout object.
+		@param g2d the Graphics2D object
+	**/
 	public void draw(Graphics2D g2d){
 		//One Lantern is 60 pixels wide and 70 pixels tall
 		Path2D.Double l = new Path2D.Double();
@@ -69,8 +102,5 @@ public class Lantern extends DrawingObject{
 		else{
 			y += 0.5;
 		}
-		
-
 	}
-
 }

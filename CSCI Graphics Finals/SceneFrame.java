@@ -1,6 +1,6 @@
 /**
-The SceneFrame class implements the KeyListener interface to allow inputs using the keyboard.
-It creates the JFrame and adds all the necessary components, such as the SceneCanvas object.
+The SceneFrame class implements the KeyListener interface to allow inputs using the keyboard and.
+It creates the JFrame and adds all the necessary components, such as the SceneCanvas object and plays sounds for specific actions.
 
 
 @author Nicole (Coeli) Pararuan (234814) and Kurt Santos (235666)
@@ -25,11 +25,15 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-//KeyListener tutorial https://www.youtube.com/watch?v=BJ7fr9XwS2o
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.*;
+
 public class SceneFrame implements KeyListener{
 	private JFrame frame;
 	private SceneCanvas sc;
-
+	private File file;
+	private Clip clip;
 	/**
 		Constructor takes the arguments and initializes the values and adds the KeyListeners
 	**/ 
@@ -41,15 +45,16 @@ public class SceneFrame implements KeyListener{
 
 	/**
 		The SceneCanvas is put into the GUI and the other settings of the GUI are set, such as the title.
+		It also prints the keybinds into the console.
 		The size is created using the pack() method.
 	**/ 
 	public void setUpGUI(){
 		frame.add(sc);
-
 		frame.setTitle("Midterm Project - Pararuan - Santos");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
+		System.out.print("The keybinds are as follows:\na - move left\nd - move right\nw - move up\ns - move down\n1 - change the duck's eyes\n2 - enable or disable his goggles\n3 - enable or disable his hat\n4 - enable or disable his lifesaver");
 	}
 
 	/**
@@ -74,37 +79,58 @@ public class SceneFrame implements KeyListener{
 			4 - enable or disable his lifesaver
 		If the duck moves beyond the left of the canvas, he is transported to the next background by calling the changeBackground() method of the SceneCanvas.
 		Otherwise, he is transported to the other edge; if he moves beyond the topmost of the canvas, he is looped back to the bottom of the canvas.
+		The duck also quacks if he moves. 
+		KeyListener tutorial: https://www.youtube.com/watch?v=BJ7fr9XwS2o
+		Sounds tutorial: https://www.youtube.com/watch?v=SyZQVJiARTQ 
+		Quack Sound: https://www.myinstants.com/en/instant/quackmp3/
 		@param e the KeyEvent 
-
 	**/ 
 	@Override
 	public void keyPressed(KeyEvent e){
+		boolean fileFound = true;
+		do {
+			try{
+				file = new File("quack.wav");
+				AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+				clip = AudioSystem.getClip();
+				clip.open(audioStream);
+			}
+			catch( UnsupportedOperationException f){
+				fileFound = false;
+				System.out.println("UnsupportedOperationException");
+			}
+			catch( LineUnavailableException g){
+				fileFound = false;
+				System.out.println("LineUnavailableException");
+			}
+			catch( UnsupportedAudioFileException h){
+				fileFound = false;
+				System.out.println("UnsupportedAudioFileException");
+			}
+			catch( IOException i){
+				fileFound = false;
+				System.out.println("IOException");
+			}
+		} while(!fileFound);
+		
 		Ducky d = sc.getDucky();
 
 		switch(e.getKeyCode()){
 		case 65:
 			d.moveLeft();
-			d.waddle();
-
-			System.out.println(d.giveY());
+			d.waddle(clip);
 			break;
 		case 68:
 			d.moveRight();
-			d.waddle();
-
-			System.out.println(d.giveY());
+			d.waddle(clip);
 			break;
 		case 83:
 			d.moveDown();
-			d.waddle();
-
-			System.out.println(d.giveY());
+			d.waddle(clip);
 			break;
 		case 87:
 			d.moveUp();
-			d.waddle();
-
-			System.out.println(d.giveY());
+			d.waddle(clip);
 			break;	
 		case 49:
 			d.swapEyes();	
@@ -134,11 +160,12 @@ public class SceneFrame implements KeyListener{
 		sc.repaint();
 	}
 
-	@Override
+	
 	/**
 		A part of the KeyListener interface for when a key is released.
 		@param e the KeyEvent 
 	**/ 
+	@Override
 	public void keyReleased(KeyEvent e){
 	}
 

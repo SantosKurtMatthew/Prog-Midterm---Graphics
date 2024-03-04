@@ -1,15 +1,42 @@
+/**
+The Ducky class extends the DrawingObject abstract class.
+It supports drawing, moving, rotating, and enabling or disabling some of
+the duck's clothing pieces.
+
+@author Nicole (Coeli) Pararuan (234814) and Kurt Santos (235666)
+@version March 6, 2024
+**/
+
+/*
+I have not discussed the Java language code in my program
+with anyone other than my instructor or the teaching assistants
+assigned to this course.
+
+I have not used Java language code obtained from another student,
+or any other unauthorized source, either modified or unmodified.
+
+If any Java language code or documentation used in my program
+was obtained from another source, such as a textbook or website,
+that has been clearly noted with a proper citation in the comments
+of my program.
+*/
+
 import java.awt.*;
 import java.awt.geom.*;
-
+import javax.sound.sampled.*;
 public class Ducky extends DrawingObject{
 	private Path2D.Double torso, hanfuInner, hanfuOuterLeft, hanfuOuterRight, hanfuRightSleeve, sleeveOutline, hanfuAccent, leftLeg, rightLeg, hanfuBelt, ahoge, happyEyes, goggle, bill, salbabida;
 	private Ellipse2D.Double hanfuOuterBack, head, leftEye, rightEye;
 	private Triangle hat;
-	private int rotation;
+	private int rotation, quackTimer;
 	private double x, y;
 	private boolean waddleState, slitEyes, enableGoggles, enableSalbabida, enableHat;
 
-
+	/**
+		The constructor initializes the variables needed for the ducky.
+		@param x the starting x value of the ducky
+		@param y the starting y value of the ducky
+	**/
 	public Ducky(double x, double y){
 		this.x = x;
 		this.y = y;
@@ -19,8 +46,14 @@ public class Ducky extends DrawingObject{
 		enableGoggles = true;
 		enableSalbabida = true;
 		enableHat = true;
+		quackTimer = 0;
 	}
 
+	/**
+		The ducky is drawn using Path2D, Ellipse2D, and Triangle2D.
+		He is scaled down to a smaller size using the scale() method.
+		Scale source: https://stackoverflow.com/questions/30792089/java-graphics2d-translate-and-scale
+	**/
 	public void draw(Graphics2D g2d){
 		g2d.scale(0.3, 0.3);
 		hanfuOuterBack = new Ellipse2D.Double(x+233, y+330, 140, 100);
@@ -46,9 +79,7 @@ public class Ducky extends DrawingObject{
 		
 
 		AffineTransform absoluteReset = g2d.getTransform();
-
 		g2d.rotate(Math.toRadians(rotation),x+275,y+400);
-		
 		AffineTransform reset = g2d.getTransform();
 		
 		g2d.setColor(Color.BLACK);
@@ -302,57 +333,102 @@ public class Ducky extends DrawingObject{
 			g2d.fill(salbabida);		
 		}	
 
-
-
 		g2d.setTransform(absoluteReset);
 		rotation = -5;
-
-
 	}
 
-
+	/**
+		Rotates the duck to the left by increasing its rotation value
+	**/
 	public void rotateLeft(){
 		rotation += -15;
 	}
+
+	/**
+		Rotates the duck to the right by decreasing its rotation value
+	**/
 	public void rotateRight(){
 		rotation += 15;
 	}
+
+	/**
+		Moves the duck to the left by decreasing its x value
+	**/
 	public void moveLeft(){
-		x -= 20;
+		x -= 40;
 	}
+
+	/**
+		Moves the duck to the right by increasing its x value
+	**/
 	public void moveRight(){
-		x += 20;
+		x += 40;
 	}
+
+	/**
+		Moves the duck up by decreasing its y value
+	**/
 	public void moveUp(){
-		y -= 20;
+		y -= 40;
 	}
+
+	/**
+		Moves the duck down by increasing its y value
+	**/
 	public void moveDown(){
-		y += 20;
+		y += 40;
 	}
-	public void waddle(){
+
+	/**
+		Rotates the duck left and right and makes him quack.
+		He quacks every 6 left turns in order to make the quacking not too often.
+		@param clip the audio clip that plays
+	**/
+	public void waddle(Clip clip){
 		if(waddleState == false){
 			rotateLeft();
 			waddleState = true;
+			if(quackTimer % 6 == 0){
+				clip.start();
+			}
+			quackTimer++;
 		}
 		else{
 			rotateRight();
 			waddleState = false;
 		}
 	}
+
+	/**
+		Gets the ducky's current x value
+		@return the ducky's current x value
+	**/
 	public double giveX(){
 		return x;
 	}
 
+	/**
+		Gets the ducky's current y value
+		@return the ducky's current y value
+	**/
 	public double giveY(){
-		System.out.println("THE RETURNED  Y IS " + y);
 		return y;
 	}	
 
+	/**
+		Sets the ducky's x and y coordinates to the given arguments
+		@param x the new x value of the duck
+		@param y the new y value of the duck
+	**/
 	public void spawnAt(double x, double y){
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+		Changes the value of the slitEyes boolean in order to change which
+		set of eyes are printed on the ducky
+	**/
 	public void swapEyes(){
 		if(slitEyes == false){
 			slitEyes = true;
@@ -361,6 +437,11 @@ public class Ducky extends DrawingObject{
 			slitEyes = false;
 		}
 	}
+
+	/**
+		Changes the value of the enableGoggles boolean in order to change whether
+		or not the goggles are printed onto the ducky
+	**/
 	public void swapGoggles(){
 		if(enableGoggles == false){
 			enableGoggles = true;
@@ -369,6 +450,11 @@ public class Ducky extends DrawingObject{
 			enableGoggles = false;
 		}
 	}
+
+	/**
+		Changes the value of the enableHat boolean in order to change whether
+		or not the hat is printed onto the ducky
+	**/
 	public void swapHat(){
 		if(enableHat == false){
 			enableHat = true;
@@ -377,6 +463,11 @@ public class Ducky extends DrawingObject{
 			enableHat = false;
 		}
 	}
+
+	/**
+		Changes the value of the enableSalbabida boolean in order to change whether
+		or not the lifesaver is printed onto the ducky
+	**/
 	public void swapSalbabida(){
 		if(enableSalbabida == false){
 			enableSalbabida = true;

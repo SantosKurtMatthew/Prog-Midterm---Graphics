@@ -19,14 +19,11 @@ was obtained from another source, such as a textbook or website,
 that has been clearly noted with a proper citation in the comments
 of my program.
 */
-import javax.swing.*;
+
 
 public class SceneStarter {
 	public static void main(String[] args){
 		SceneFrame sf = new SceneFrame();
 		sf.setUpGUI();
-
-		
-		
 	}
 }

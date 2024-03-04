@@ -1,3 +1,26 @@
+/**
+The Cloud class extends the DrawingObject abstract class.
+It draws one of 3 possible cloud shapes. 
+It is animated using a timer in SceneCanvas.
+
+@author Nicole (Coeli) Pararuan (234814) and Kurt Santos (235666)
+@version March 6, 2024
+**/
+
+/*
+I have not discussed the Java language code in my program
+with anyone other than my instructor or the teaching assistants
+assigned to this course.
+
+I have not used Java language code obtained from another student,
+or any other unauthorized source, either modified or unmodified.
+
+If any Java language code or documentation used in my program
+was obtained from another source, such as a textbook or website,
+that has been clearly noted with a proper citation in the comments
+of my program.
+*/
+
 import java.awt.*;
 import java.awt.geom.*;
 
@@ -13,7 +36,14 @@ public class Cloud extends DrawingObject{
 	private Ellipse2D.Double e3;
 	private Ellipse2D.Double e4;
 
-	// Random Integer from https://stackoverflow.com/questions/5271598/java-generate-random-number-between-two-given-values
+	/**
+		The constructor initializes the values. The type of the cloud is randomly generated.
+		Random Integer Source: https://stackoverflow.com/questions/5271598/java-generate-random-number-between-two-given-values
+		@param x the starting x value of the cloud
+		@param y the starting y value of the cloud
+		@param size the size of the cloud
+		@param color the color of the cloud
+	**/
 	public Cloud(double x, double y, double size, Color color) {
 		this.x = x;
 		this.y = y;
@@ -23,8 +53,12 @@ public class Cloud extends DrawingObject{
 		
 	}
 	
+	/**
+		The cloud is drawn using multiple ellipses in different positions.
+		They are then filled with the color set in the constructor.
+		@param g2d the Graphics2D object
+	**/
 	public void draw(Graphics2D g2d){
-		
 		if (cloudNumber == 0){
 			e1 = new Ellipse2D.Double(x,y+size*.8,size*1.75,size*.8);
 			e2 = new Ellipse2D.Double(x+size*.7,y,size*2.8,size*1.8);
@@ -57,6 +91,12 @@ public class Cloud extends DrawingObject{
 			g2d.fill(e4);
 		}
 	}
+
+	/**
+		The cloud's x value increases by 5. 
+		This is repeatedly called using a timer in order to animate the cloud.
+		If the cloud hits the edge of the canvas, it is regenerated at the opposite edge.
+	**/
 	public void flow() {
 		x += 5;
 		if (x > 800){
@@ -65,6 +105,4 @@ public class Cloud extends DrawingObject{
 
 		}
 	}
-
-
 }
