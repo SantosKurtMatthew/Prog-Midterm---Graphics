@@ -25,12 +25,13 @@ import java.awt.*;
 import java.awt.geom.*;
 import javax.sound.sampled.*;
 public class Ducky extends DrawingObject{
-	private Path2D.Double torso, hanfuInner, hanfuOuterLeft, hanfuOuterRight, hanfuRightSleeve, sleeveOutline, hanfuAccent, leftLeg, rightLeg, hanfuBelt, ahoge, happyEyes, goggle, bill, salbabida;
+	private Path2D.Double torso, hanfuInner, hanfuOuterLeft, hanfuOuterRight, hanfuRightSleeve, sleeveOutline, hanfuAccent, leftLeg, rightLeg, hanfuBelt, ahoge, happyEyes, goggle, bill, salbabida, snorkel;
 	private Ellipse2D.Double hanfuOuterBack, head, leftEye, rightEye;
 	private Triangle hat;
 	private int rotation, quackTimer;
 	private double x, y;
 	private boolean waddleState, slitEyes, enableGoggles, enableSalbabida, enableHat;
+	private Line stripe1, stripe2;
 
 	/**
 		The constructor initializes the variables needed for the ducky.
@@ -76,7 +77,9 @@ public class Ducky extends DrawingObject{
 		bill = new Path2D.Double();
 		hat = new Triangle(x+275, y+50, x+160, y+140, x+390, y+140, Color.DARK_GRAY, "fill");
 		salbabida = new Path2D.Double();
-		
+		snorkel = new Path2D.Double();
+		stripe1 = new Line(x+319, y+171, x+324, y+171, 10, Color.WHITE);
+		stripe2 = new Line(x+313, y+192, x+315, y+195, 10, Color.WHITE);
 
 		AffineTransform absoluteReset = g2d.getTransform();
 		g2d.rotate(Math.toRadians(rotation),x+275,y+400);
@@ -289,10 +292,17 @@ public class Ducky extends DrawingObject{
 			g2d.draw(goggle);
 			g2d.setStroke(new BasicStroke(3));
 			g2d.setColor(Color.YELLOW);
-			g2d.draw(goggle);	
-		}
+			g2d.draw(goggle);
 
-		
+			g2d.setColor(Color.RED);
+			snorkel.moveTo(x+275, y+210);
+			snorkel.curveTo(x+325, y+200, x+315, y+170, x+315, y+150);
+			snorkel.curveTo(x+340, y+155, x+335, y+220, x+275, y+210);
+			g2d.fill(snorkel);
+
+			stripe1.draw(g2d);
+			stripe2.draw(g2d);	
+		}
 		
 		bill.moveTo(x+265, y+190);
 		bill.lineTo(x+245, y+210);
@@ -334,6 +344,7 @@ public class Ducky extends DrawingObject{
 		}	
 
 		g2d.setTransform(absoluteReset);
+		g2d.scale(3.33,3.33);
 		rotation = -5;
 	}
 

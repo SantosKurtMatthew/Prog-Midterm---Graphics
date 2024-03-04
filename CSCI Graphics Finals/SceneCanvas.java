@@ -88,13 +88,14 @@ public class SceneCanvas extends JComponent implements ActionListener{
 		mountains.add(c2);
 		mountains.add(c3);
 		mountains.add(c4);
+		mountains.add(d1);
 		mountains.add(f1);
 		mountains.add(f2);
 		mountains.add(f3);
 		mountains.add(f4);
 		mountains.add(f5);
 		mountains.add(f6);
-		mountains.add(d1);
+		
 		
 		rg = new RedGate();
 		l1 = new Lantern(-10, 50);
