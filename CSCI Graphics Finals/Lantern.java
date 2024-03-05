@@ -39,13 +39,17 @@ public class Lantern extends DrawingObject{
 		@param x the starting x value of the lantern
 		@param y the starting y value of the lantern
 	**/
-	public Lantern(float x, float y){
+	public Lantern(float x){
 		this.x = x;
-		this.y = y;
+		y = (int)(10+Math.random()*200);
 		yOriginal = y;
 		xOriginal = x;
-		up = false;
 		newBaseY = y;
+		
+		if( (int)(Math.random()*2) == 0 )
+			up = false;
+		else
+			up = true;
 	}
 	
 	/**
@@ -77,30 +81,34 @@ public class Lantern extends DrawingObject{
 		Font font = new Font ("TimesRoman", Font.BOLD, 30);
 		FontRenderContext frc = g2d.getFontRenderContext();
 		TextLayout layout = new TextLayout("嘎", font, frc);
-		g2d.setColor(new Color(144, 35, 35));
+		g2d.setColor(new Color(144, 35, 35, 100));
 		layout.draw(g2d, (float)loc.getX(), (float)loc.getY());
 	}
 
-	public void flow() {
-		x ++;
-		if(x > 800){
-			x = xOriginal;
+	public void flow(int stateCounter) {
+		
+		if( x >= 800 || y < 0 ){
+			x = -10;
 			y = yOriginal;
-		}
-		
-		if(y == newBaseY+10){
-			up = true;
-		}
-		else if(y == newBaseY) {
+			newBaseY = y;
 			up = false;
-			newBaseY -= 3;
 		}
 		
-		if( up ) {
-			y -= 0.5;
+		x++;
+		if(up){
+			y-=0.5;
 		}
 		else{
 			y += 0.5;
 		}
+		
+		if (up == false && stateCounter % 10 == 0){
+			up = true;
+		}
+		else if (up == true && stateCounter % 10 == 0){
+			up = false;
+		}
+		
+			
 	}
 }

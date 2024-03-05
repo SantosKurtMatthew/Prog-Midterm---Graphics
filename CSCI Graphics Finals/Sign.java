@@ -29,15 +29,23 @@ import java.awt.font.*;
 
 public class Sign extends DrawingObject{
 	private int x, y;
+	private boolean stickExists;
+	private String location, direction;
 
 	/**	
 		Constructor takes the arguments and initializes the values
 		@param x the starting x coordinate of the woodenPlank square
 		@param y the starting y coordinate of the woodenPlank square
+		@param stickExists whether or not the wooden stick will be drawn
+		@param location the location that will be printed on the sign
+		@param direction the arrow to be printed on the sign
 	**/
-	public Sign(int x, int y){
+	public Sign(int x, int y, boolean stickExists, String location, String direction){
 		this.x = x;
 		this.y = y;
+		this.stickExists = stickExists;
+		this.location = location;
+		this.direction = direction;
 	}
 
 	/**	
@@ -46,9 +54,12 @@ public class Sign extends DrawingObject{
 		@param g2d The Graphics2D object
 	**/
 	public void draw(Graphics2D g2d){
-		Line woodStake = new Line(x+30, y-5, x+30, y+75, 5, new Color(117, 98, 53));
+		
 		Square woodPlank = new Square(x, y, 60, new Color(179, 146, 70));
-		woodStake.draw(g2d);
+		if (stickExists){
+			Line woodStake = new Line(x+30, y-5, x+30, y+75, 5, new Color(117, 98, 53));
+			woodStake.draw(g2d);	
+		}
 		woodPlank.draw(g2d);
 
 		Font font = new Font ("TimesRoman", Font.PLAIN, 15);
@@ -56,13 +67,13 @@ public class Sign extends DrawingObject{
 		Point2D loc1 = new Point2D.Float(x+12, y+20);
 		TextLayout layout1 = new TextLayout("Duck", font, frc);
 		Point2D loc2 = new Point2D.Float(x+12, y+35);
-		TextLayout layout2 = new TextLayout("Land", font, frc);
+		TextLayout layout2 = new TextLayout(location, font, frc);
 		g2d.setColor(Color.BLACK);
 		layout1.draw(g2d, (float)loc1.getX(), (float)loc1.getY());
 		layout2.draw(g2d, (float)loc2.getX(), (float)loc2.getY());
 		
 		Font fontBold = new Font ("TimesRoman", Font.BOLD, 15);
-		TextLayout layout3 = new TextLayout("<-", fontBold, frc);
+		TextLayout layout3 = new TextLayout(direction, fontBold, frc);
 		Point2D loc3 = new Point2D.Float(x+25, y+50);
 		layout3.draw(g2d, (float)loc3.getX(), (float)loc3.getY());
 	}

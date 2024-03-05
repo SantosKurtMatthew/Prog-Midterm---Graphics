@@ -35,21 +35,29 @@ public class Cloud extends DrawingObject{
 	private Ellipse2D.Double e2;
 	private Ellipse2D.Double e3;
 	private Ellipse2D.Double e4;
+	private boolean fog;
 
 	/**
 		The constructor initializes the values. The type of the cloud is randomly generated.
 		Random Integer Source: https://stackoverflow.com/questions/5271598/java-generate-random-number-between-two-given-values
 		@param x the starting x value of the cloud
 		@param y the starting y value of the cloud
-		@param size the size of the cloud
-		@param color the color of the cloud
+		@param fog decides transulency and size
 	**/
-	public Cloud(double x, double y, double size, Color color) {
+	public Cloud(double x, double y, boolean fog) {
 		this.x = x;
 		this.y = y;
-		this.size = size;
-		this.color = color;
-		this.cloudNumber = (int)(Math.random()*3);;
+		this.fog = fog;
+		cloudNumber = (int)(Math.random()*3);
+		
+		if( fog ) {
+			size = (50+(int)(Math.random()*30));
+			color = new Color(255,255,255,100);
+		}
+		else {
+			size = (20+(int)(Math.random()*30));
+			color = Color.WHITE;
+		}
 		
 	}
 	
@@ -59,6 +67,7 @@ public class Cloud extends DrawingObject{
 		@param g2d the Graphics2D object
 	**/
 	public void draw(Graphics2D g2d){
+		
 		if (cloudNumber == 0){
 			e1 = new Ellipse2D.Double(x,y+size*.8,size*1.75,size*.8);
 			e2 = new Ellipse2D.Double(x+size*.7,y,size*2.8,size*1.8);
@@ -91,18 +100,26 @@ public class Cloud extends DrawingObject{
 			g2d.fill(e4);
 		}
 	}
-
+	
 	/**
-		The cloud's x value increases by 5. 
+		The cloud's x value increases by 4. 
 		This is repeatedly called using a timer in order to animate the cloud.
 		If the cloud hits the edge of the canvas, it is regenerated at the opposite edge.
 	**/
 	public void flow() {
-		x += 5;
-		if (x > 800){
+		x -= 4;
+		
+		if (x < -200) {
 			cloudNumber = (int)(Math.random()*3);
-			x = -100;
-
+			
+			if( fog )
+				size = (50+(int)(Math.random()*30));
+			else 
+				size = (20+(int)(Math.random()*30));
+			
+			x = 850;
 		}
 	}
+
+
 }

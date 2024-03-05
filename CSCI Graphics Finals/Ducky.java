@@ -24,20 +24,23 @@ of my program.
 import java.awt.*;
 import java.awt.geom.*;
 import javax.sound.sampled.*;
+
 public class Ducky extends DrawingObject{
+
 	private Path2D.Double torso, hanfuInner, hanfuOuterLeft, hanfuOuterRight, hanfuRightSleeve, sleeveOutline, hanfuAccent, leftLeg, rightLeg, hanfuBelt, ahoge, happyEyes, goggle, bill, salbabida, snorkel;
 	private Ellipse2D.Double hanfuOuterBack, head, leftEye, rightEye;
 	private Triangle hat;
 	private int rotation, quackTimer;
-	private double x, y;
-	private boolean waddleState, slitEyes, enableGoggles, enableSalbabida, enableHat;
-	private Line stripe1, stripe2;
+	private double x, y, baseY;
+	private boolean waddleState, bounceUp, slitEyes, enableGoggles, enableSalbabida, enableHat;
+	private Line snorkelStripe1, snorkelStripe2, salbabidaStripe1, salbabidaStripe2, salbabidaStripe3;
 
 	/**
 		The constructor initializes the variables needed for the ducky.
 		@param x the starting x value of the ducky
 		@param y the starting y value of the ducky
 	**/
+
 	public Ducky(double x, double y){
 		this.x = x;
 		this.y = y;
@@ -48,6 +51,8 @@ public class Ducky extends DrawingObject{
 		enableSalbabida = true;
 		enableHat = true;
 		quackTimer = 0;
+		baseY = y;
+		bounceUp = true;
 	}
 
 	/**
@@ -78,11 +83,25 @@ public class Ducky extends DrawingObject{
 		hat = new Triangle(x+275, y+50, x+160, y+140, x+390, y+140, Color.DARK_GRAY, "fill");
 		salbabida = new Path2D.Double();
 		snorkel = new Path2D.Double();
-		stripe1 = new Line(x+319, y+171, x+324, y+171, 10, Color.WHITE);
-		stripe2 = new Line(x+313, y+192, x+315, y+195, 10, Color.WHITE);
+		snorkelStripe1 = new Line(x+319, y+171, x+324, y+171, 10, Color.WHITE);
+		snorkelStripe2 = new Line(x+313, y+192, x+315, y+195, 10, Color.WHITE);
+		/**
+			double salbabidaLeftTipX = x+170;
+			double salbabidaRightTipX = x+380;
+			salbabida.moveTo(salbabidaLeftTipX, y+255);
+			salbabida.curveTo(salbabidaLeftTipX, y+245, salbabidaLeftTipX, y+230, x+220, y+225); // left curve going up
+			salbabida.curveTo(x+230, y+250, x+320, y+250, x+330, y+225); // top curve
+			salbabida.curveTo(salbabidaRightTipX, y+230, salbabidaRightTipX, y+245, salbabidaRightTipX, y+255); // right curve going down
+			salbabida.curveTo(x+355, y+310, x+195, y+310, salbabidaLeftTipX, y+255); // bottom curve
+		**/
+		salbabidaStripe1 = new Line(x+210, y+230, x+195, y+270, 15, Color.WHITE);
+		
+		
 
 		AffineTransform absoluteReset = g2d.getTransform();
-		g2d.rotate(Math.toRadians(rotation),x+275,y+400);
+
+		g2d.rotate(Math.toRadians(rotation),x+310,y+280);
+		
 		AffineTransform reset = g2d.getTransform();
 		
 		g2d.setColor(Color.BLACK);
@@ -292,17 +311,19 @@ public class Ducky extends DrawingObject{
 			g2d.draw(goggle);
 			g2d.setStroke(new BasicStroke(3));
 			g2d.setColor(Color.YELLOW);
-			g2d.draw(goggle);
-
+			g2d.draw(goggle);	
+			
 			g2d.setColor(Color.RED);
 			snorkel.moveTo(x+275, y+210);
 			snorkel.curveTo(x+325, y+200, x+315, y+170, x+315, y+150);
 			snorkel.curveTo(x+340, y+155, x+335, y+220, x+275, y+210);
 			g2d.fill(snorkel);
 
-			stripe1.draw(g2d);
-			stripe2.draw(g2d);	
+			snorkelStripe1.draw(g2d);
+			snorkelStripe2.draw(g2d);	
 		}
+
+		
 		
 		bill.moveTo(x+265, y+190);
 		bill.lineTo(x+245, y+210);
@@ -340,12 +361,36 @@ public class Ducky extends DrawingObject{
 			salbabida.curveTo(x+355, y+310, x+195, y+310, salbabidaLeftTipX, y+255); // bottom curve
 			g2d.setColor(Color.BLUE);
 			g2d.setStroke(new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-			g2d.fill(salbabida);		
+			g2d.fill(salbabida);	
+
+			salbabidaStripe1.draw(g2d);
 		}	
+
+
 
 		g2d.setTransform(absoluteReset);
 		g2d.scale(3.33,3.33);
 		rotation = -5;
+
+
+	}
+	
+	/* INSERT COMMENT !!!*/
+	public void levitate(int stateCounter) {
+		
+		if(bounceUp == false && stateCounter % 15 == 0){
+			bounceUp = true;
+		}
+		else if(bounceUp == true && stateCounter % 15 == 0) {
+			bounceUp = false;
+		}
+		
+		if( bounceUp ) {
+			y -= 2;
+		}
+		else{
+			y += 2;
+		}
 	}
 
 	/**
@@ -366,6 +411,7 @@ public class Ducky extends DrawingObject{
 		Moves the duck to the left by decreasing its x value
 	**/
 	public void moveLeft(){
+		baseY = y;
 		x -= 40;
 	}
 
@@ -373,6 +419,7 @@ public class Ducky extends DrawingObject{
 		Moves the duck to the right by increasing its x value
 	**/
 	public void moveRight(){
+		baseY = y;
 		x += 40;
 	}
 
@@ -380,6 +427,7 @@ public class Ducky extends DrawingObject{
 		Moves the duck up by decreasing its y value
 	**/
 	public void moveUp(){
+		baseY = y-40;
 		y -= 40;
 	}
 
@@ -387,6 +435,7 @@ public class Ducky extends DrawingObject{
 		Moves the duck down by increasing its y value
 	**/
 	public void moveDown(){
+		baseY = y;
 		y += 40;
 	}
 

@@ -121,6 +121,7 @@ public class SceneFrame implements KeyListener{
 			d.waddle(clip);
 			break;
 		case 68:
+
 			d.moveRight();
 			d.waddle(clip);
 			break;
@@ -146,10 +147,11 @@ public class SceneFrame implements KeyListener{
 			break;
 		}
 		if(d.giveX() < -460){
-			sc.changeBackground(2210);
+			sc.changeBackground(2220, true);
 		}
 		else if(d.giveX() > 2520){
-			d.spawnAt(-140, d.giveY());
+
+			sc.changeBackground(-140, false);
 		}
 		else if(d.giveY() > 1940){
 			d.spawnAt(d.giveX(), -40);
@@ -160,7 +162,6 @@ public class SceneFrame implements KeyListener{
 		sc.repaint();
 	}
 
-	
 	/**
 		A part of the KeyListener interface for when a key is released.
 		@param e the KeyEvent 
