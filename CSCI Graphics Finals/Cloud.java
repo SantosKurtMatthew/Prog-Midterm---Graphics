@@ -1,6 +1,7 @@
 /**
-The Cloud class extends the DrawingObject abstract class.
+The Cloud class extends the DrawingObject abstract class. 
 It draws one of 3 possible cloud shapes. 
+It can also be used to create fog.
 It is animated using a timer in SceneCanvas.
 
 @author Nicole (Coeli) Pararuan (234814) and Kurt Santos (235666)

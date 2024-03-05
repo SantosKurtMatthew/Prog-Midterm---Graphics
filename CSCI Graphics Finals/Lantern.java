@@ -85,6 +85,12 @@ public class Lantern extends DrawingObject{
 		layout.draw(g2d, (float)loc.getX(), (float)loc.getY());
 	}
 
+	/**
+		To be used with the timer in SceneCanvas to animate the lanterns.
+		The lanterns bob up and down while moving to the right of the screen.
+		The up and down motion of the lantern is done using a boolean and setting a specific interval.
+		@param flickerCounter the stateCounter variable in SceneCanvas used to slow down some of the animations
+	**/
 	public void flow(int stateCounter) {
 		
 		if( x >= 800 || y < 0 ){

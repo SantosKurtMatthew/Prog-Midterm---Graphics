@@ -1,8 +1,8 @@
 /**
 The Sign class is a composite shape and extends the DrawingObject abstract class. 
 The constructor takes the starting x and y coordinates where the point of reference is the top left corner of the woodPlank.
-The draw method will draw the woodPlank (a square) and a woodStake (a line) going vertically through the middle of the plank.
-It will also draw text that says "Duck Land <-" onto the plank using the TextLayout object.
+The draw method will draw the woodPlank (a square) and  may draw a woodStake (a line) going vertically through the middle of the plank.
+It will also draw text onto the plank using the TextLayout object.
 
 @author Nicole (Coeli) Pararuan (234814) and Kurt Santos (235666)
 @version March 6, 2024

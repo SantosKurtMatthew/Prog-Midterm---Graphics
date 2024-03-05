@@ -40,7 +40,6 @@ public class Ducky extends DrawingObject{
 		@param x the starting x value of the ducky
 		@param y the starting y value of the ducky
 	**/
-
 	public Ducky(double x, double y){
 		this.x = x;
 		this.y = y;

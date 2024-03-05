@@ -96,6 +96,7 @@ public class Star extends DrawingObject{
 		This method is meant to be used with the timer in the SceneCanvas class in order to animate the glow of the star.
 		In order to make the pulsing slower, the pulsing only happens at specific intervals of the timer. It will either 
 		shrink or set the glow circle back to its normal size.
+		@param flickerCounter the stateCounter variable in SceneCanvas used to slow down some of the animations
 	**/
 	public void glowFlow(int flickerCounter){
 		if(flickerCounter % 10 == 0){
